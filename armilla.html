@@ -1,1 +1,149 @@
-html.
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="UTF-8">
+<title>Armilla objednávky</title>
+
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        text-align: center;
+        margin: 0;
+        padding: 0;
+    }
+
+    /* Logo */
+    .logo {
+        margin-top: 30px;
+    }
+
+    .spiral {
+        width: 80px;
+        height: 80px;
+        border: 6px solid #555;
+        border-radius: 50%;
+        border-top-color: transparent;
+        margin: auto;
+        transform: rotate(45deg);
+    }
+
+    h1 {
+        margin: 10px 0 30px 0;
+    }
+
+    /* Produkty */
+    .products {
+        display: flex;
+        justify-content: center;
+        gap: 50px;
+        margin-bottom: 30px;
+    }
+
+    .left, .right {
+        text-align: left;
+    }
+
+    .product {
+        margin: 10px 0;
+    }
+
+    /* Formulář */
+    .form {
+        margin: 20px auto;
+        width: 300px;
+        text-align: left;
+    }
+
+    .form input {
+        width: 100%;
+        padding: 8px;
+        margin: 5px 0 15px 0;
+    }
+
+    button {
+        padding: 10px 20px;
+        font-size: 16px;
+        cursor: pointer;
+    }
+</style>
+
+<script>
+function sendOrder() {
+    let products = [
+        "Náramek (růženín) - 45 Kč",
+        "Náramek (ametist) - 45 Kč",
+        "Náramek (achát) - 45 Kč",
+        "Náušnice (turmalín) - 40 Kč",
+        "Náušnice (růženín) - 40 Kč",
+        "Přívěšek (ametist) - 50 Kč"
+    ];
+
+    let quantities = document.getElementsByClassName("qty");
+    let message = "Objednávka:\n\n";
+
+    for (let i = 0; i < quantities.length; i++) {
+        if (quantities[i].value > 0) {
+            message += products[i] + " - množství: " + quantities[i].value + "\n";
+        }
+    }
+
+    let name = document.getElementById("name").value;
+    let email = document.getElementById("email").value;
+    let phone = document.getElementById("phone").value;
+
+    message += "\nJméno: " + name;
+    message += "\nEmail: " + email;
+    message += "\nTelefon: " + phone;
+
+    window.location.href =
+        "mailto:ptackova.nikola@kostka-skola.cz?subject=Objednávka Armilla&body=" +
+        encodeURIComponent(message);
+}
+</script>
+
+</head>
+
+<body>
+
+<div class="logo">
+    <div class="spiral"></div>
+    <h1>Armilla</h1>
+</div>
+
+<div class="products">
+    <!-- Levý sloupec -->
+    <div class="left">
+        <div class="product">Náramek (růženín) - 45 Kč</div>
+        <div class="product">Náramek (ametist) - 45 Kč</div>
+        <div class="product">Náramek (achát) - 45 Kč</div>
+        <div class="product">Náušnice (turmalín) - 40 Kč</div>
+        <div class="product">Náušnice (růženín) - 40 Kč</div>
+        <div class="product">Přívěšek (ametist) - 50 Kč</div>
+    </div>
+
+    <!-- Pravý sloupec -->
+    <div class="right">
+        <input class="qty" type="number" min="0" value="0"><br>
+        <input class="qty" type="number" min="0" value="0"><br>
+        <input class="qty" type="number" min="0" value="0"><br>
+        <input class="qty" type="number" min="0" value="0"><br>
+        <input class="qty" type="number" min="0" value="0"><br>
+        <input class="qty" type="number" min="0" value="0"><br>
+    </div>
+</div>
+
+<div class="form">
+    <label>Jméno:</label>
+    <input type="text" id="name">
+
+    <label>Email:</label>
+    <input type="email" id="email">
+
+    <label>Telefon:</label>
+    <input type="tel" id="phone">
+</div>
+
+<button onclick="sendOrder()">Odeslat objednávku</button>
+
+</body>
+</html>
